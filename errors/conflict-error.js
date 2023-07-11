@@ -3,6 +3,6 @@ class ConflictError extends Error {
     super(message);
     this.statusCode = 409;
   }
-}  
+}
 
 module.exports = ConflictError;
