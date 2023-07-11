@@ -4,8 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/users'); // импортируем роуты пользователя
 const cardRoutes = require('./routes/cards'); // импортируем роуты карточек
-const errorHandler = require('./errors/error-handler');
-const BadRequestError = require('./errors/bad-request-error');
+const errorHandler = require('./middleware/error-handler');
 const NotFoundError = require('./errors/not-found-error');
 
 const { PORT = 3000 } = process.env;

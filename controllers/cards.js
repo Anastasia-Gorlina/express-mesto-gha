@@ -43,7 +43,7 @@ module.exports.likeCard = (request, response, next) => {
     request.params.id,
     { $addToSet: { likes: request.user._id } }, // добавить _id в массив, если его там нет
     { new: true },
-)
+  )
     .then((card) => {
       if (!card) {
         throw new NotFoundError(`Запрашиваемый пользователь с id ${request.params.id} не найден`);
@@ -65,7 +65,7 @@ module.exports.dislikeCard = (request, response, next) => {
     request.params.id,
     { $pull: { likes: request.user._id } }, // убрать _id из массива
     { new: true },
-)
+  )
     .then((card) => {
       if (!card) {
         throw new NotFoundError(`Запрашиваемый пользователь с id ${request.params.id} не найден`);
