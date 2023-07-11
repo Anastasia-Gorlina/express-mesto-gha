@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const { 
-  getUsers, createUser, getUserId, updateUser, updateAvatar 
+const {
+  getUsers, createUser, getUserId, updateUser, updateAvatar,
 } = require('../controllers/users');
 
 router.get('/users', getUsers);
