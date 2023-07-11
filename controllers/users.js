@@ -13,7 +13,7 @@ module.exports.getUserId = (request, response, next) => {
   const idUser = request.params.id;
   User.findById(idUser)
     .then((userFound) => {
-      if(!userFound) {
+      if (!userFound) {
         throw new NotFoundError(`Запрашиваемый пользователь с id ${idUser} не найден`);
       }
       return response.status(200).json(userFound);
@@ -33,7 +33,7 @@ module.exports.getUserId = (request, response, next) => {
 module.exports.createUser = (request, response, next) => {
   const { name, about, avatar } = request.body;
   return User.create({ name, about, avatar }) // создадим пользователя на основе пришедших данных
-    .then(user => response.status(201).send(
+    .then((user) => response.status(201).send(
       {
         name: user.name,
         about: user.about,
