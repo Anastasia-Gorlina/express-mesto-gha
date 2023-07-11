@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   req.user = {
-    _id: '61db06f1a62735aa21a5ee77'
+    _id: '61db06f1a62735aa21a5ee77',
   };
   next();
 });
@@ -27,10 +27,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  // Если всё работает, консоль покажет, какой порт приложение слушает
-  console.log(`App listening on port ${PORT}`)
+  console.log(`App listening on port ${PORT}`);
 });

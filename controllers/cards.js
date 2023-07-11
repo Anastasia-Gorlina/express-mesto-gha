@@ -1,7 +1,6 @@
 const Card = require('../models/card');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
-
 // возвращает все карточки
 module.exports.getCards = (request, response) => Card.find({})
   .then((cards) => response.status(200).send({ data: cards }))
@@ -57,7 +56,7 @@ module.exports.likeCard = (request, response, next) => {
       } else {
         next(error); // Для всех остальных ошибок
       }
-});
+    });
 };
 
 module.exports.dislikeCard = (request, response, next) => {
