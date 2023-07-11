@@ -8,7 +8,7 @@ module.exports.getCards = (request, response) => Card.find({})
 
 module.exports.deleteCard = (request, response, next) => {
   const idCard = request.params.id;
-  return Card.findByIdAndRemove(idcard)
+  return Card.findByIdAndRemove(idCard)
     .then((cardFound) => {
       if (!cardFound) {
         throw new NotFoundError(`Карточка с id ${idCard} не найдена`);
