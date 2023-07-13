@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use('/', userRoutes); // запускаем импортированные роуты
 app.use('/', cardRoutes); // запускаем импортированные роуты
 
-mongoose.connect('mongodb://localhost:27017/mestodb');
+mongoose.connect('mongodb://localhost:3000/mestodb');
 
 app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
