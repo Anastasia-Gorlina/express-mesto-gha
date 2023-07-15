@@ -1,32 +1,33 @@
 const Card = require('../models/card');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
-// возвращает все карточки
-module.exports.getCards = (request, response) => Card.find({})
-  .then((cards) => response.status(200).send({ data: cards }))
-  .catch(() => response.status(500).send({ message: 'Произошла ошибка' }));
+const ForbiddenError = require('../errors/forbidden-error');
 
+// возвращает все карточки
+module.exports.getCards = (request, response, next) => Card.find({})
+  .then((cards) => response.status(200).send({ data: cards }))
+  .catch(next);
+
+// удаляет карточку по _id
 module.exports.deleteCard = (request, response, next) => {
-  const idCard = request.params.id;
-  return Card.findByIdAndRemove(idCard)
-    .then((cardFound) => {
-      if (!cardFound) {
-        throw new NotFoundError(`Карточка с id ${idCard} не найдена`);
+  const { id } = request.params;
+  
+  Card.findById(id)
+    .orFail(() => new NotFoundError(`Карточка с id ${id} не найдена`))
+    .then((card) => {
+      if (!card.owner.equals(request.user._id)) {
+        return next(new ForbiddenError('Недостаточно прав для удаления этой карточки'));
       }
-      return response.status(200).json(cardFound);
+      return card.remove()
+        .then(() => response.send('Карточка удалена'));
     })
-    .catch((error) => {
-      if (error.name === 'CastError') {
-        next(new BadRequestError(`Переданный id ${idCard} не корректен`));
-      } else {
-        next(error); // Для всех остальных ошибок
-      }
-    });
+    .catch(next);
 };
+
 // создаёт карточку
 module.exports.createCard = (request, response, next) => {
   const { name, link } = request.body; // получим из объекта запроса название и ссылку карточки
-  const owner = request.user._id; // временное решение из app.js 20;
+  const owner = request.user._id;
   return Card.create({ name, link, owner }) // создадим карточку на основе пришедших данных
     .then((card) => response.status(201).send(card)) // вернём записанные в базу данные
     .catch((error) => {
