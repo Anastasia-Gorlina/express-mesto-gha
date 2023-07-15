@@ -140,3 +140,4 @@ module.exports.updateAvatar = (request, response, next) => User.findByIdAndUpdat
       next(error); // Для всех остальных ошибок
     }
   });
+  

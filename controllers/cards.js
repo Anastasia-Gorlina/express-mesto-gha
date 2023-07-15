@@ -11,7 +11,7 @@ module.exports.getCards = (request, response, next) => Card.find({})
 // удаляет карточку по _id
 module.exports.deleteCard = (request, response, next) => {
   const { id } = request.params;
-  
+
   Card.findById(id)
     .orFail(() => new NotFoundError(`Карточка с id ${id} не найдена`))
     .then((card) => {
