@@ -3,9 +3,6 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const UnauthorizedError = require('../errors/unauthorized-error');
 
-const app = express();
-app.use(cookieParser());
-
 const auth = (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;

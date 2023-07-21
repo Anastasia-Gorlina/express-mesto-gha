@@ -11,6 +11,8 @@ const { PORT = 3000 } = process.env;
 
 app.use(express.json());
 
+app.use(cookieParser());
+
 app.use((req, res, next) => {
   req.user = {
     _id: '61db06f1a62735aa21a5ee77',
