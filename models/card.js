@@ -11,6 +11,10 @@ const cardSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
+    validate: {
+      validator: (v) => isUrl(v),
+      message: 'Некорректный URL',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -27,5 +31,4 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
-// создаём модель и экспортируем её
 module.exports = mongoose.model('card', cardSchema);
