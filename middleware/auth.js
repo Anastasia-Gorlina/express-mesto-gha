@@ -1,6 +1,4 @@
 const jwt = require('jsonwebtoken');
-const express = require('express');
-const cookieParser = require('cookie-parser');
 const UnauthorizedError = require('../errors/unauthorized-error');
 
 const auth = (req, res, next) => {
