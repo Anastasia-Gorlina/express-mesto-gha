@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
-const UnauthorizedError = require('../errors/unauthorized-error');
 const cookieParser = require('cookie-parser');
+const UnauthorizedError = require('../errors/unauthorized-error');
 
 const app = express();
 app.use(cookieParser());
