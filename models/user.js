@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.findUserByCredentials = function(email, password) {
+userSchema.statics.findUserByCredentials = function (email, password) {
   return this
     .findOne({ email })
     .select('+password')
@@ -59,7 +59,7 @@ userSchema.statics.findUserByCredentials = function(email, password) {
     });
 };
 
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
 
