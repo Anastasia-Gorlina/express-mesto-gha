@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/unauthorized-error');
 const cookieParser = require('cookie-parser');
+const express = require('express');
+
 const app = express();
 app.use(cookieParser());
 
 const auth = (req, res, next) => {
   const token = req.cookies.jwt;
-  // const token = req.headers.cookie;
-  // console.log(req.headers.cookie);
   let payload;
 
   try {
